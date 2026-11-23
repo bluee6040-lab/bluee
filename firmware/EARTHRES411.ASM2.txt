@@ -1,0 +1,20 @@
+;EARTHRES411.ASM 08MAR03 - JOHN BECKER - EPE EARTH RESISTIVITY LOGGER
+
+;PIC16F876 3.6864MHz xtal, WDT off, POR on
+; written in TASM for TK3 assembly
+
+                LIST P = PIC16F876,R=DEC
+                __config H'3F31' 
+
+#DEFINE BANK0 BCF 3,5    ; status bit 5
+#DEFINE BANK1 BSF 3,5    ; status bit 5
+#DEFINE BLOCK0 BCF $03,7 ; clear STATUS bit 7 (IRP)
+#DEFINE BLOCK1 BSF $03,7 ; set   STATUS bit 7 (IRP)
+
+		include P16F876.inc
+
+
+LOOPA:      .EQU $20     ;loop counter 2 - LCD use only
+STORE1:     .EQU $21     ;general store 1
+CLKCNT:     .EQU $22     ;pre-counter for CLOCK
+RSLINE:     .EQU $23     ;RS line flag for LCD
